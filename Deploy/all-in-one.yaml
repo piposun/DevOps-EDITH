@@ -1,45 +1,26 @@
 #app-web-controller
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: app-web
-  # these labels can be applied automatically
-  # from the labels in the pod template if not set
-  # labels:
-    # app: edith
-    # tier: app-web
+  labels:
+    app: edith
 spec:
-  # this replicas value is default
-  # modify it according to your case
-  replicas: 3
-  # selector can be applied automatically
-  # from the labels in the pod template if not set
-  # selector:
-  #   app: edith
-  #   tier: app-web
+  selector:
+    matchLabels:
+      app: edith
+      tier: web
   template:
     metadata:
       labels:
         app: edith
-        tier: app-web
+        tier: web
     spec:
       containers:
-      - name: java-redis
+      - name: edith-app
         image: piposun/edith:1.0
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        env:
-        - name: GET_HOSTS_FROM
-          value: dns
-          # If your cluster config does not include a dns service, then to
-          # instead access environment variables to find service host
-          # info, comment out the 'value: dns' line above, and uncomment the
-          # line below.
-          # value: env
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
 ---
 #app-web-service
@@ -62,7 +43,7 @@ spec:
 ---
 #redis-master controller
 apiVersion: v1
-kind: ReplicationController
+kind: Deployment
 metadata:
   name: redis-master
   # these labels can be applied automatically 
