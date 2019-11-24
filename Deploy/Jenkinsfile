@@ -21,7 +21,7 @@ pipeline {
         
         stage ('Docker Build/Push Image on GCR') {
             steps {
-                sh 'gcloud builds submit --tag gcr.io/edith-259213/retwis-image .'
+                sh 'gcloud container builds submit --tag gcr.io/edith-259213/retwis-image:1.0 .'
             }
         }
         
