@@ -18,16 +18,13 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage ('Docker build'){
-        	steps{
-        	    sh 'docker build . -t piposun/edith:1.0'
-        	}
+        
+        stage ('Docker Build/Push Image on GCR') {
+            steps {
+                sh 'gcloud builds submit --tag gcr.io/edith-259213/retwis-image .'
+            }
         }
-        stage ('Docker push'){
-            steps{
-        	    sh 'docker push piposun/edith:1.0'
-        	}   
-        }
+        
         stage ('Finished'){
            steps{
 				sh 'echo "Hello World"'
