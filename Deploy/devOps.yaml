@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-master
+  template:
+    metadata:
+      labels:
+        app: redis-master
+    spec:
+      containers:
+        - name: redis-master
+          image: "redis"
+          ports:
+            - name: api
+              containerPort: 6379
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "redis-master"
+spec:
+  selector:
+    app: "redis-master"
+  ports:
+    - port: 6379
+      targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edith
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edith
+  template:
+    metadata:
+      labels:
+        app: edith
+    spec:
+      containers:
+        - name: edith
+          image: "piposun/edith:1.0"
+          ports:
+            - name: http
+              containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: "edith"
+spec:
+  type: LoadBalancer
+  selector:
+    app: "edith"
+  ports:
+    - port: 8080
