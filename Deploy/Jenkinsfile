@@ -19,12 +19,33 @@ pipeline {
             }
         }
         
-        stage ('Docker Build/Push Image on GCR') {
+        stage ('Test') {
             steps {
-                sh 'gcloud builds submit --tag gcr.io/edith-259213/retwis-image:1.0 .'
+                sh 'ls'
             }
         }
         
+        //stage ('Docker Build/Push Image on GCR') {
+            //steps {
+                //sh 'gcloud builds submit --tag gcr.io/edith-259213/retwis_image:1.0 .'
+            //}
+        //}
+        
+        stage ('Docker build'){
+        	steps{
+        	   sh 'docker build . -t eu.gcr.io/edith-259213/retwis_image:1.0'
+        	}
+        }
+        
+        stage ('Push the image on GCR'){
+        	steps{
+        	   sh '''
+        	   gcloud auth configure-docker --quiet
+        	   docker push eu.gcr.io/edith-259213/retwis_image:1.0
+        	   '''
+        	}
+        }
+  
         stage ('Finished'){
            steps{
 				sh 'echo "Hello World"'
