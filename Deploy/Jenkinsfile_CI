@@ -48,7 +48,7 @@ pipeline {
     			git config --global user.email jenkins@example.com
 				git add Deploy/edith-deployment.yaml
 				git commit -m "Update image version (from jenkins_CI)"
-				git remote origin "https://github.com/piposun/DevOps-EDITH.git" 
+				git remote show origin
 				git push -u origin master
 				'''
            }
