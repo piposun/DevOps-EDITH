@@ -43,6 +43,8 @@ pipeline {
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
 				sh'''
+				git config --global user.name "Jenkins"
+    			git config --global user.email jenkins@example.com
 				git add Deploy/edith-deployment.yaml
 				git commit -m "Update image version (from jenkins_CI)" 
 				git push origin master --force
