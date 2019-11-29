@@ -12,7 +12,7 @@ div.post p {
 
 .box {
   padding: 10px;
-  background: #00ffff;
+  background: rgba(29, 161, 242, 0.5);
   -moz-border-radius-bottomleft:5px;scr
   -moz-border-radius-bottomright:5px;
   -moz-border-radius-topleft:5px;
