@@ -26,7 +26,10 @@ pipeline {
        	
     	stage('Application deployment on K8S') {
     	    steps{
-                sh'kubectl apply -f Deploy/edith-deployment.yaml'
+                sh'''
+                kubectl delete edith
+                kubectl apply -f Deploy/edith-deployment.yaml
+                '''
                 }
     	}
         
