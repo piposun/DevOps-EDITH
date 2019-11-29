@@ -43,8 +43,9 @@ pipeline {
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
 				sh'''
-				git commit -m "Update image version (from jenkins_CI)" ./Deploy/edith-deployment.yaml
-				git push origin master
+				git add Deploy/edith-deployment.yaml
+				git commit -m "Update image version (from jenkins_CI)" 
+				git push origin master --force
 				'''
            }
         }
