@@ -46,6 +46,7 @@ spec:
     spec:
       containers:
         - name: edith
+          imagePullPolicy: Always
           image: "eu.gcr.io/edith-259213/edith:1.0"
           ports:
             - name: http
