@@ -4,6 +4,11 @@ pipeline {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
     }
+    environment{
+        GCLOUD_PROJECT_ID = 'edith-259213'
+        GCLOUD_K8S_CLUSTER_NAME = 'edith-cluster'
+        GCLOUD_K8S_CONTEXT_NAME = 'edith-cluster'
+    }
     stages {
         stage ('Initialize') {
             steps {
@@ -13,25 +18,23 @@ pipeline {
                 '''
             }
         }
-        stage ('Deploy') {
+        stage ('Deploy - Cluster connection') {
             steps {
-                withCredentials([file(credentialsId: "${JENKINS_GCLOUD_CRED_ID}", variable: 'JENKINSGCLOUDCREDENTIAL')])
-                         {
-                        sh'gcloud container clusters get-credentials ${GCLOUD_K8S_CLUSTER_NAME}'
-                }
+                sh'gcloud container clusters get-credentials ${GCLOUD_K8S_CLUSTER_NAME} --region europe-west1-b'
             }
        	}
        	
-    	stage('Deploy Application on K8s') {
-        container('kubectl'){
-            withKubeConfig([credentialsId: env.K8s_CREDENTIALS_ID,
-            serverUrl: env.K8s_SERVER_URL,
-            contextName: env.K8s_CONTEXT_NAME,
-            clusterName: env.K8s_CLUSTER_NAME]){
-                sh'kubectl apply -f config.yml'
-                sh'kubectl apply -f ${app1_name}.yml'
-                sh'kubectl set image deployment/${app1_name} ${app1_container_name}=${app1_image_tag}'
-            }
-        }
-   }
+       	stage('Ls') {
+    	    steps{
+                sh'ls ./DevOps-EDITH -a'
+                }
+    	}
+    	
+    	stage('Application deployment on K8S') {
+    	    steps{
+                sh'kubectl apply -f ./DevOps-EDITH/Deploy/devOps.yaml'
+                }
+    	}
+        
+    }
 }
