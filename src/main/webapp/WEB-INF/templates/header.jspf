@@ -19,7 +19,7 @@
   	  <![endif]-->
   	  <link rel="stylesheet" href="<c:url value="/static/styles/custom.css"/>" type="text/css" media="screen, projection"/> 
   	  <link rel="icon" type="image/x-ico" href="<c:url value="/static/images/favicon.ico"/>">
-	  <title>EDITH : redis demonstration</title>	
+	  <title>EDITH : Redis demonstration</title>	
 	</head>
 
     <body>
