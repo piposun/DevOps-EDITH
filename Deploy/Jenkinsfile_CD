@@ -26,8 +26,15 @@ pipeline {
        	
     	stage('Application deployment on K8S') {
     	    steps{
+<<<<<<< HEAD
     	        sh'sed -i s/BUILD_NUMBER/$BUILD_NUMBER/ Deploy/edith-deployment.yaml'
                 sh'kubectl apply -f Deploy/edith-deployment.yaml'
+=======
+                sh'''
+                kubectl delete edith:1.0
+                kubectl apply -f Deploy/edith-deployment.yaml
+                '''
+>>>>>>> branch 'master' of https://github.com/piposun/DevOps-EDITH.git
                 }
     	}
         
