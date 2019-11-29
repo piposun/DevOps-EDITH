@@ -33,6 +33,21 @@ pipeline {
         	   '''
         	}
         }
+        
+        stage ('Update image version'){
+           steps{
+				sh'sed -i s/BUILD_NUMBER/$BUILD_NUMBER/ Deploy/edith-deployment.yaml'
+           }
+        }
+        
+        stage ('Commit/Push edit-deployment.yaml'){
+           steps{
+				sh'''
+				git commit -m "Update image version (from jenkins_CI)" ./Deploy/edith-deployment.yaml
+				git push origin master
+				'''
+           }
+        }
   
         stage ('Finished'){
            steps{

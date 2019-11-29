@@ -26,9 +26,8 @@ pipeline {
        	
     	stage('Application deployment on K8S') {
     	    steps{
-    	        sh'sed -i s/BUILD_NUMBER/$BUILD_NUMBER/ Deploy/edith-deployment.yaml'
                 sh'kubectl apply -f Deploy/edith-deployment.yaml'
-                }
+            }
     	}
         
     }
