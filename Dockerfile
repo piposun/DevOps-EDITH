@@ -2,7 +2,7 @@
 
 FROM tomcat:8.5-alpine
 
-ADD target/edith-1.0.war /usr/local/tomcat/webapps/
+ADD target/edith-1.0.war /usr/local/tomcat/webapps/edith.war
 
 EXPOSE 8080
 EXPOSE 6379
