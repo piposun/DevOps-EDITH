@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: edith
-          image: "eu.gcr.io/edith-259213/retwis_image:1.0"
+          image: "eu.gcr.io/edith-259213/edith:1.0"
           ports:
             - name: http
               containerPort: 8080
