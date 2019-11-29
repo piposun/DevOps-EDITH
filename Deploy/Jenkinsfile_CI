@@ -43,6 +43,7 @@ pipeline {
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
 				sh'''
+				ls -a
 				git config --global user.name "Jenkins"
     			git config --global user.email jenkins@example.com
 				git add Deploy/edith-deployment.yaml
