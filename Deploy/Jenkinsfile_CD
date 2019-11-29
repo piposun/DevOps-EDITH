@@ -24,15 +24,9 @@ pipeline {
             }
        	}
        	
-       	stage('Ls') {
-    	    steps{
-                sh'ls ./DevOps-EDITH -a'
-                }
-    	}
-    	
     	stage('Application deployment on K8S') {
     	    steps{
-                sh'kubectl apply -f ./DevOps-EDITH/Deploy/devOps.yaml'
+                sh'kubectl apply -f Deploy/devOps.yaml'
                 }
     	}
         
