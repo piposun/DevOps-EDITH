@@ -42,6 +42,7 @@ pipeline {
         
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
+           withCredentials([usernamePassword(credentialsId: 'f035962a-8254-4090-90c3-8e1a633792bf', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
 				sh'''
 				git config --global user.name "Jenkins"
     			git config --global user.email jenkins@example.com
@@ -49,6 +50,8 @@ pipeline {
 				git commit -m "Update image version (from jenkins_CI)"
 				git push origin HEAD:master
 				'''
+				
+                    }
            }
         }
   
