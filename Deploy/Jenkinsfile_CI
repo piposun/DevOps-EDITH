@@ -47,7 +47,7 @@ pipeline {
     			git config --global user.email jenkins@example.com
 				git add Deploy/edith-deployment.yaml
 				git commit -m "Update image version (from jenkins_CI)"
-				git push --set-upstream
+				git push origin HEAD:master
 				'''
            }
         }
