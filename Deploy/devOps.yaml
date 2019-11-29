@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-master
+  name: app-redis-master
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis-master
+      app: app-redis-master
   template:
     metadata:
       labels:
-        app: redis-master
+        app: app-redis-master
     spec:
       containers:
-        - name: redis-master
+        - name: app-redis-master
           image: "redis"
           ports:
             - name: api
@@ -25,7 +25,7 @@ metadata:
   name: "redis-master"
 spec:
   selector:
-    app: "redis-master"
+    app: "app-redis-master"
   ports:
     - port: 6379
       targetPort: 6379
@@ -50,6 +50,10 @@ spec:
           ports:
             - name: http
               containerPort: 8080
+      initContainers:
+        - name: init-redis-master
+          image: busybox
+          command: ['sh', '-c', 'until nslookup redis-master; do echo waiting for redis-master; sleep 2; done;']
 ---
 kind: Service
 apiVersion: v1
