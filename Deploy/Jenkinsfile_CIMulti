@@ -52,33 +52,30 @@ pipeline {
         
         stage ('Docker build'){
         	steps{
-        	   sh 'docker build . -t eu.gcr.io/edith-259213/edith:${env.VERSION}'
+        	   sh "docker build . -t eu.gcr.io/edith-259213/edith:${env.VERSION}"
         	}
         }
         
         stage ('Push the image on GCR'){
         	steps{
-        	   sh '''
-        	   gcloud auth configure-docker --quiet
-        	   docker push eu.gcr.io/edith-259213/edith:${env.VERSION}
-        	   '''
+        	   sh 'gcloud auth configure-docker --quiet'
+        	   sh "docker push eu.gcr.io/edith-259213/edith:${env.VERSION}"
+
         	}
         }
         
         stage ('Update image version'){
            steps{
-				sh'sed -i s/edith:1.0.[0-9]*/edith:${env.VERSION}/ Deploy/edith-deployment.yaml'
+				sh"sed -i s/edith:1.0.[0-9]*/edith:${env.VERSION}/ Deploy/edith-deployment.yaml"
            }
         }
         
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
            sshagent (credentials: ['github-ssh']) { 
-				sh'''
-				git add Deploy/edith-deployment.yaml
-				git commit -m "Update image version (from jenkins_CI)"
-				git push origin HEAD:${env.BRANCH}
-				'''
+				sh'git add Deploy/edith-deployment.yaml'
+				sh'git commit -m "Update image version (from jenkins_CI)"'
+				sh"git push origin HEAD:${env.BRANCH}"
 				}
            }
         }
