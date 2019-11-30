@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+    stages {
+    	stage('CI for dev'){
+    	    when{
+    	        branch 'development'
+    	    }
+			steps{
+			    sh'echo "Branch dev!"'
+			}
+    	}
+    	
+    	stage('CI for master'){
+    	    when{
+    	        branch 'master'
+    	    }
+			steps{
+			    sh'echo "Branch master!"'
+			}
+    	}
+    }
+}
