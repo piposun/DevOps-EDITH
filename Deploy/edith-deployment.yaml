@@ -1,5 +1,5 @@
 version_build: "1.0.0"
-apiVersion: apps/v1
+apiVersion: apps/v2
 kind: Deployment
 metadata:
   name: app-redis-master
