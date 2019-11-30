@@ -42,13 +42,13 @@ pipeline {
         
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
-           sshagent (credentials: ['github-ssh']) { 
+           //sshagent (credentials: ['github-ssh']) { 
 				sh'''
 				git add Deploy/edith-deployment.yaml
 				git commit -m "Update image version (from jenkins_CI)"
 				git push origin HEAD:master
 				'''
-				}
+				//}
            }
         }
   
