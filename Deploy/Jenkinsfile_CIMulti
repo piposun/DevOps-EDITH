@@ -4,32 +4,35 @@ pipeline {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
     }
+    environment{
+        BRANCH = ''
+        VERSION = ''
+    }
 
     stages {
     	stage ('Init environment Master branch'){
     		when{
     		    branch 'master'
     		}
-    		environment{
-        		BRANCH = 'master'
-        		VERSION = '1.0.0'
-   			}
 			steps{
 			    sh'echo "Master branch environment initialization..."'
+			    script{
+			      	env.BRANCH = 'master'
+			    	env.VERSION = '1.0.0'  
+			    }
 			}
-
     	}
     	
     	stage ('Init environment Development branch'){
     		when{
     		    branch 'development'
     		}
-    		environment{
-        		BRANCH = 'development'
-        		VERSION = '1.0.$BUILD_NUMBER'
-   			}
     		steps{
     		    sh'echo "Development branch environment initialization..."'
+    		    script{
+    		        env.BRANCH = 'development'
+			    	env.VERSION = '1.0.$BUILD_NUMBER'  
+    		    }
     		}
     	}
 
