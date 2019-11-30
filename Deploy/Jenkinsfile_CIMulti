@@ -5,8 +5,8 @@ pipeline {
         jdk 'jdk8'
     }
     environment{
-        BRANCH = ''
-        VERSION = ''
+        BRANCH = "master"
+        VERSION = "1.0.0"
     }
 
     stages {
@@ -17,8 +17,8 @@ pipeline {
 			steps{
 			    sh'echo "Master branch environment initialization..."'
 			    script{
-			      	env.BRANCH = 'master'
-			    	env.VERSION = '1.0.0'  
+			      	env.BRANCH = "master"
+			    	env.VERSION = "1.0.0"  
 			    }
 			}
     	}
@@ -30,8 +30,8 @@ pipeline {
     		steps{
     		    sh'echo "Development branch environment initialization..."'
     		    script{
-    		        env.BRANCH = 'development'
-			    	env.VERSION = '1.0.$BUILD_NUMBER'  
+    		        env.BRANCH = "development"
+			    	env.VERSION = "1.0.$BUILD_NUMBER"  
     		    }
     		}
     	}
