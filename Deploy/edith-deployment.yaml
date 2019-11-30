@@ -47,7 +47,7 @@ spec:
       containers:
         - name: edith
           imagePullPolicy: Always
-          image: "eu.gcr.io/edith-259213/edith:BUILD_NUMBER"
+          image: "eu.gcr.io/edith-259213/edith:39"
           ports:
             - name: http
               containerPort: 8080
