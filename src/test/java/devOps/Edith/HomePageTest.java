@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;  
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;  
 
 public class HomePageTest {
 	private WebDriver driver; 
@@ -15,8 +16,9 @@ public class HomePageTest {
 	@Before
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", 
-                       "/Users/licianesur/Downloads/chromedriver");
-
+                       "/usr/bin/chromedriver");
+		
+		
 		driver = new ChromeDriver();
 		baseUrl = "http://35.240.3.128:8080/edith/";
 		pageTitle = "";
