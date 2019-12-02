@@ -18,8 +18,10 @@ public class HomePageTest {
 		System.setProperty("webdriver.chrome.driver", 
                        "/usr/bin/chromedriver");
 		
+	      ChromeOptions ChromeOptions = new ChromeOptions();
+	      ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
 		
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(ChromeOptions);
 		baseUrl = "http://35.240.3.128:8080/edith/";
 		pageTitle = "";
 		expectedTitle = "EDITH : Redis demonstration";
