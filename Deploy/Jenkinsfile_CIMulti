@@ -115,16 +115,13 @@ pipeline {
            steps{
            dir("DevOps-deployment") {
            sh'ls'
-           sshagent (credentials: ['github-ssh']) {
-           
-           
-           
+           //sshagent (credentials: ['github-ssh']) {
 					sh'git add edith-deployment.yaml'
 					sh'git commit -m "Update image version (from jenkins_CI)"'
 					sh"git push origin HEAD:refs/remotes/origin/master"
 				}
 			  }
-           }
+           //}
         }
   
         stage ('Finished'){
