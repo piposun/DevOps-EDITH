@@ -4,12 +4,12 @@ pipeline {
    stages {
       stage('Test') {
          steps {
-            echo BRANCH_NAME
-            echo CHANGE_ID
-            echo CHANGE_URL
-            echo CHANGE_TITLE
-            echo CHANGE_AUTHOR
-            echo CHANGE_TARGET
+            echo ${BRANCH_NAME}
+            echo ${CHANGE_ID}
+            echo ${CHANGE_URL}
+            echo ${CHANGE_TITLE}
+            echo ${CHANGE_AUTHOR}
+            echo ${CHANGE_TARGET}
          }
       }
    }
