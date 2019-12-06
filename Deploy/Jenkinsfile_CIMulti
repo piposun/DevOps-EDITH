@@ -47,9 +47,9 @@ pipeline {
 				
 			      	env.PROD_VERSION = "$version"
 			    	env.VERSION = "$env.FIRST_VERSION" + "." + "$env.PROD_VERSION" + "." + "$env.DEV_VERSION"
-			    	echo $env.FIRST_VERSION
-			    	echo $env.PROD_VERSION
-			    	echo $env.DEV_VERSION
+			    	echo env.FIRST_VERSION
+			    	echo env.PROD_VERSION
+			    	echo env.DEV_VERSION
 			    }
 			}
     	}
@@ -70,9 +70,9 @@ pipeline {
 				
 					env.DEV_VERSION = "$version"
 					env.VERSION = "$env.FIRST_VERSION" + "." + "$env.PROD_VERSION" + "." + "$env.DEV_VERSION"
-			    	echo $env.FIRST_VERSION
-			    	echo $env.PROD_VERSION
-			    	echo $env.DEV_VERSION
+			    	echo env.FIRST_VERSION
+			    	echo env.PROD_VERSION
+			    	echo env.DEV_VERSION
     		    }
     		}
     	}
