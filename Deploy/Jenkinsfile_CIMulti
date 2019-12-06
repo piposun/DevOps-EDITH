@@ -9,10 +9,11 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-            	sh 'rm -rf DevOps-deployment; mkdir -p DevOps-deployment'
+            	
+            	sh 'git clone https://github.com/piposun/DevOps-deployment'
             	dir("DevOps-deployment") {
 
-	                git 'https://github.com/piposun/DevOps-deployment'
+	                
 	           
 	                script {
 	                    def filename = 'edith-deployment.yaml'
@@ -115,13 +116,17 @@ pipeline {
            steps{
            dir("DevOps-deployment") {
            sh'ls'
-           //sshagent (credentials: ['github-ssh']) {
+           sshagent (credentials: ['github-ssh']) {
+           
+           		    sh'git config --global user.name "Manus06"'
+                    sh'git config --global user.email "jenkins@isen.fr"'
+           
 					sh'git add edith-deployment.yaml'
 					sh'git commit -m "Update image version (from jenkins_CI)"'
-					sh"git push origin HEAD:refs/remotes/origin/master"
+					sh"git push origin HEAD:master"
 				}
 			  }
-           //}
+           }
         }
   
         stage ('Finished'){
