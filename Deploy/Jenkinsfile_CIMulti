@@ -9,7 +9,7 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-            	sh 'mkdir -p DevOps-deployment'
+            	sh 'rm -rf DevOps-deployment; mkdir -p DevOps-deployment'
             	dir("DevOps-deployment") {
                 git 'https://github.com/piposun/DevOps-deployment'
            
@@ -116,8 +116,6 @@ pipeline {
            sh'ls'
            sshagent (credentials: ['github-ssh']) {
            
-           sh"git config --global user.name 'jenkins'"
-           		
 					sh'git add edith-deployment.yaml'
 					sh'git commit -m "Update image version (from jenkins_CI)"'
 					sh"git push origin HEAD:master"
