@@ -73,6 +73,7 @@ pipeline {
 			    	echo env.FIRST_VERSION
 			    	echo env.PROD_VERSION
 			    	echo env.DEV_VERSION
+			    	echo "Version dev : " + version
     		    }
     		}
     	}
