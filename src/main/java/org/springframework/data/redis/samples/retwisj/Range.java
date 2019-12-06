@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 package org.springframework.data.redis.samples.retwisj;
-scqfqz
+
 /**
  * Basic object indicating a range of objects to retrieve. Default is 10 objects (starting at zero).
  * 
