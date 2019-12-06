@@ -46,7 +46,10 @@ pipeline {
 					version++
 				
 			      	env.PROD_VERSION = "$version"
-			    	env.VERSION = "$env.FIRST_VERSION" + "." + "$env.PROD_VERSION" + "." + "$env.DEV_VERSION"
+			    	env.VERSION = "${env.FIRST_VERSION}" + "." + "${env.PROD_VERSION}" + "." + "${env.DEV_VERSION}"
+			    	echo ${env.FIRST_VERSION}
+			    	echo ${env.PROD_VERSION}
+			    	echo ${env.DEV_VERSION}
 			    }
 			}
     	}
@@ -66,7 +69,10 @@ pipeline {
 					version++
 				
 					env.DEV_VERSION = "$version"
-					env.VERSION = "$env.FIRST_VERSION" + "." + "$env.PROD_VERSION" + "." + "$env.DEV_VERSION"
+					env.VERSION = "${env.FIRST_VERSION}" + "." + "${env.PROD_VERSION}" + "." + "${env.DEV_VERSION}"
+			    	echo ${env.FIRST_VERSION}
+			    	echo ${env.PROD_VERSION}
+			    	echo ${env.DEV_VERSION}
     		    }
     		}
     	}
@@ -103,7 +109,7 @@ pipeline {
            steps{
 	   	script {
 	   	 	def filename = 'Deploy/edith-deployment.yaml'
-	   	 	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: $version/\' $filename"
+	   	 	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: ${env.VERSION}/\' $filename"
 		 	sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/edith:${env.VERSION}/ $filename"
 		 	sh "cat $filename"
 		 }
