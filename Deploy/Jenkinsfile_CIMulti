@@ -10,10 +10,11 @@ pipeline {
     	stage ('Read YAML file') {
             steps {
             	sh 'mkdir -p DevOps-deployment'
-                sh "cd DevOps-deployment; git 'https://github.com/piposun/DevOps-deployment'"
-                sh 'ls; ls DevOps-deployment'
+            	dir("DevOps-deployment") {
+                git 'https://github.com/piposun/DevOps-deployment'
+           
                 script {
-                    def filename = 'DevOps-deployment/edith-deployment.yaml'
+                    def filename = 'edith-deployment.yaml'
                     def data = readYaml file: filename
                     def seperator = '.'
                     def version = data.version_build[0].toString()
@@ -26,6 +27,7 @@ pipeline {
 		    		env.FIRST_VERSION = firstVersion
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion	    		
+                }
                 }
             }
         }
