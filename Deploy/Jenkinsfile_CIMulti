@@ -4,15 +4,9 @@ pipeline {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
     }
-    environment{
-        BRANCH = "master"
-        //FIRST_VERSION = ""
-		//PROD_VERSION = ""
-		//DEV_VERSION = ""
-		//VERSION = ""
-    }
 
     stages {
+    
     	stage ('Read YAML file') {
             steps {
                 //git 'https://github.com/piposun/DevOps-EDITH'
@@ -27,15 +21,9 @@ pipeline {
                     def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
                     def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
 		    
-		    		env.FIRST_VERSION = "5"
+		    		env.FIRST_VERSION = firstVersion
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion
-		    		echo "first version: " + firstVersion
-			    	echo "prod version: " + prodVersion
-			    	echo "dev version: " + devVersion
-		    		echo "dev version: ${FIRST_VERSION}"
-			    	echo "dev version: ${PROD_VERSION}"
-			    	echo "dev version: ${DEV_VERSION}"
                 }
             }
         }
@@ -47,15 +35,13 @@ pipeline {
 			steps{
 			    sh'echo "Master branch environment initialization..."'
 			    script{
+			    	env.BRANCH = "master"
 			        def version = "$env.PROD_VERSION"
                     version = version.toInteger()
 					version++
 				
 			      	env.PROD_VERSION = version
 			    	env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
-			    	echo FIRST_VERSION
-			    	echo PROD_VERSION
-			    	echo DEV_VERSION
 			    }
 			}
     	}
@@ -76,9 +62,6 @@ pipeline {
 				
 					env.DEV_VERSION = version
 					env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
-			    	echo FIRST_VERSION
-			    	echo PROD_VERSION
-			    	echo DEV_VERSION
     		    }
     		}
     	}
