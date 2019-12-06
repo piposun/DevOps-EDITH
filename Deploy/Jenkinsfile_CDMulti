@@ -24,7 +24,10 @@ pipeline {
             }
        	}
        	
-    	stage('Application deployment on K8S') {
+    	stage('Application Production deployment on K8S') {
+    		when{
+    		    branch 'master'
+    		}
     	    steps{
     	    	git 'https://github.com/piposun/DevOps-deployment'
     	    	
@@ -45,6 +48,17 @@ pipeline {
                 
                 sh'kubectl apply --validate=false -f edith-deployment.yaml'
                 
+            }
+    	}
+    	
+    	stage('Application Development deployment on K8S') {
+    		when{
+    		    branch 'development'
+    		}
+    	    steps{
+    	    	git 'https://github.com/piposun/DevOps-deployment'
+    	    	
+                sh'kubectl apply --validate=false -f edith-deployment.yaml -n development'
             }
     	}
         
