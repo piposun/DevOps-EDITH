@@ -10,7 +10,7 @@ pipeline {
     	stage ('Read YAML file') {
             steps {
                 git 'https://github.com/piposun/DevOps-deployment'
-                ssh 'ls'
+                sh 'ls'
                 script {
                     def filename = 'DevOps-deployment/edith-deployment.yaml'
                     def data = readYaml file: filename
