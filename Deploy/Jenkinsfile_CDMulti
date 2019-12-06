@@ -26,7 +26,8 @@ pipeline {
        	
     	stage('Application deployment on K8S') {
     	    steps{
-                sh'kubectl apply --validate=false -f Deploy/edith-deployment.yaml'
+    	    	git 'https://github.com/piposun/DevOps-deployment' 
+                sh'kubectl apply --validate=false -f edith-deployment.yaml'
             }
     	}
         

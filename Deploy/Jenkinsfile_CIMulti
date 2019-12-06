@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    
+    def TOTO = "10"
+    
     tools {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
@@ -9,9 +12,9 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-                //git 'https://github.com/piposun/DevOps-EDITH'
+                git 'https://github.com/piposun/DevOps-deployment' 
                 script {
-                    def filename = 'Deploy/edith-deployment.yaml'
+                    def filename = 'edith-deployment.yaml'
                     def data = readYaml file: filename
                     def seperator = '.'
                     def version = data.version_build[0].toString()
@@ -24,6 +27,9 @@ pipeline {
 		    		env.FIRST_VERSION = firstVersion
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion
+		    		
+		    		echo TOTO
+		    		TOTO = "12"
                 }
             }
         }
@@ -77,6 +83,7 @@ pipeline {
         }
         stage ('Build') {
             steps {
+                echo TOTO
                 sh 'mvn clean package'
             }
         }
@@ -109,9 +116,9 @@ pipeline {
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
            sshagent (credentials: ['github-ssh']) { 
-				sh'git add Deploy/edith-deployment.yaml'
+				sh'git add edith-deployment.yaml'
 				sh'git commit -m "Update image version (from jenkins_CI)"'
-				sh"git push origin HEAD:${env.BRANCH}"
+				sh"git push origin HEAD:master"
 				}
            }
         }
