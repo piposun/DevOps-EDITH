@@ -27,9 +27,9 @@ pipeline {
                     def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
                     def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
 		    
-		    		env.FIRST_VERSION = "$firstVersion"
-                    env.PROD_VERSION = "$prodVersion"
-		    		env.DEV_VERSION = "$devVersion"
+		    		env.FIRST_VERSION = firstVersion
+                    env.PROD_VERSION = prodVersion
+		    		env.DEV_VERSION = devVersion
                 }
             }
         }
