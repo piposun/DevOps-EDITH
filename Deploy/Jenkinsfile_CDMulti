@@ -27,11 +27,22 @@ pipeline {
     	stage('Application deployment on K8S') {
     	    steps{
     	    	git 'https://github.com/piposun/DevOps-deployment'
-    	    	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/&.0/\' edith-deployment.yaml"
-		 	    sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/&.0/ edith-deployment.yaml"
-		 	    sh "cat edith-deployment.yaml"
-                sh'kubectl apply --validate=false -f edith-deployment.yaml'
-                
+    	    	
+    	    	script {
+	    	    	def filename = 'edith-deployment.yaml'
+		            def data = readYaml file: filename
+		            def seperator = '.'
+		            def version = data.version_build[0].toString()
+		                   
+		            def firstVersion = version.substring(0, version.indexOf(seperator))
+		            def tmp = version.substring(version.indexOf(seperator)+1, version.length())
+		            def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
+		                    
+	    	    	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: $firstVersion.$prodVersion.0/\' edith-deployment.yaml"
+			 	    sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/edith:$firstVersion.$prodVersion.0/ edith-deployment.yaml"
+			 	    sh "cat edith-deployment.yaml"
+	                sh'kubectl apply --validate=false -f edith-deployment.yaml'
+                }
                 
             }
     	}
