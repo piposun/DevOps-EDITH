@@ -11,6 +11,7 @@ pipeline {
             steps {
             	sh 'rm -rf DevOps-deployment; mkdir -p DevOps-deployment'
             	dir("DevOps-deployment") {
+            	sshagent (credentials: ['github-ssh']) {
                 git 'https://github.com/piposun/DevOps-deployment'
            
                 script {
@@ -27,6 +28,7 @@ pipeline {
 		    		env.FIRST_VERSION = firstVersion
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion	    		
+                }
                 }
                 }
             }
