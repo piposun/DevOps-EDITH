@@ -9,22 +9,27 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-                //git 'https://github.com/piposun/DevOps-EDITH'
-                script {
-                    def filename = 'Deploy/edith-deployment.yaml'
-                    def data = readYaml file: filename
-                    def seperator = '.'
-                    def version = data.version_build[0].toString()
-                   
-                    def firstVersion = version.substring(0, version.indexOf(seperator))
-                    def tmp = version.substring(version.indexOf(seperator)+1, version.length())
-                    def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
-                    def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
-		    
-		    		env.FIRST_VERSION = firstVersion
-                    env.PROD_VERSION = prodVersion
-		    		env.DEV_VERSION = devVersion
+            	sh 'rm -rf DevOps-deployment'
+            	sshagent (credentials: ['github-ssh']) {
+            	sh 'git clone git@github.com:piposun/DevOps-deployment.git'
+            	dir("DevOps-deployment") {
+	                script {
+	                    def filename = 'edith-deployment.yaml'
+	                    def data = readYaml file: filename
+	                    def seperator = '.'
+	                    def version = data.version_build[0].toString()
+	                   
+	                    def firstVersion = version.substring(0, version.indexOf(seperator))
+	                    def tmp = version.substring(version.indexOf(seperator)+1, version.length())
+	                    def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
+	                    def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
+			    
+			    		env.FIRST_VERSION = firstVersion
+	                    env.PROD_VERSION = prodVersion
+			    		env.DEV_VERSION = devVersion	    		
+	                }
                 }
+            }
             }
         }
 	
@@ -98,21 +103,27 @@ pipeline {
         stage ('Update image version'){
            steps{
 	   	script {
-	   	 	def filename = 'Deploy/edith-deployment.yaml'
+	   	 	def filename = 'DevOps-deployment/edith-deployment.yaml'
 	   	 	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: ${env.VERSION}/\' $filename"
 		 	sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/edith:${env.VERSION}/ $filename"
-		 	sh "cat $filename"
 		 }
            }
         }
         
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
-           sshagent (credentials: ['github-ssh']) { 
-				sh'git add Deploy/edith-deployment.yaml'
-				sh'git commit -m "Update image version (from jenkins_CI)"'
-				sh"git push origin HEAD:${env.BRANCH}"
+           dir("DevOps-deployment") {
+           sh'ls'
+           sshagent (credentials: ['github-ssh']) {
+           
+           		    sh'git config --global user.name "Manus06"'
+                    sh'git config --global user.email "jenkins@isen.fr"'
+           
+					sh'git add edith-deployment.yaml'
+					sh'git commit -m "Update image version (from jenkins_CI)"'
+					sh"git push origin HEAD:master"
 				}
+			  }
            }
         }
   

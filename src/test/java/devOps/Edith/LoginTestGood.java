@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-public class LoginTest {
+public class LoginTestGood {
 	
 	private WebDriver driver; 
 
@@ -24,7 +24,7 @@ public class LoginTest {
 	}
 	
 	@Test
-	public void testPageTitle(){
+	public void testLogin(){
   driver.get("http://35.240.3.128:8080/edith/signIn"); 
   
   
@@ -39,8 +39,8 @@ public class LoginTest {
   String expectedUrl= driver.getCurrentUrl(); 
   
   if(actualUrl.equalsIgnoreCase(expectedUrl)) { 
-	  System.out.println("Login Test PASSED"); }
-  else { System.out.println("Login Test FAILED"); 
+	  System.out.println("Login Test Good PASSED"); }
+  else { System.out.println("Login Test Good FAILED"); 
   } 
   }
 	

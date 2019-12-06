@@ -26,6 +26,8 @@
       <div class="container">
       	  <div class="header">
       	  	  <div class="span-15 prepend-1">
+      	  	        	  <div class= "boutonNotLike"></div>
+      	  	  
       	  	     <h2 class="alt"><a href="<c:url value="/"/>"">EDITH Twitter</a></h2>
       	  	  </div>
 			  <div class="span-8 last right-align">
