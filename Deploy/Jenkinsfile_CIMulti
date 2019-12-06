@@ -4,15 +4,14 @@ pipeline {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
     }
-    environment{
-        BRANCH = "master"
-        //FIRST_VERSION = ""
-		//PROD_VERSION = ""
-		//DEV_VERSION = ""
-		//VERSION = ""
-    }
 
     stages {
+    	def BRANCH = "master"
+    	def FIRST_VERSION = "1"
+		def PROD_VERSION = "0"
+		def DEV_VERSION = "0"
+		def VERSION = "1.0.0"
+		
     	stage ('Read YAML file') {
             steps {
                 //git 'https://github.com/piposun/DevOps-EDITH'
@@ -27,15 +26,9 @@ pipeline {
                     def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
                     def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
 		    
-		    		env.FIRST_VERSION = "5"
-                    env.PROD_VERSION = prodVersion
-		    		env.DEV_VERSION = devVersion
-		    		echo "first version: " + firstVersion
-			    	echo "prod version: " + prodVersion
-			    	echo "dev version: " + devVersion
-		    		echo "dev version: ${FIRST_VERSION}"
-			    	echo "dev version: ${PROD_VERSION}"
-			    	echo "dev version: ${DEV_VERSION}"
+		    		FIRST_VERSION = firstVersion
+                    PROD_VERSION = prodVersion
+		    		DEV_VERSION = devVersion
                 }
             }
         }
@@ -51,11 +44,8 @@ pipeline {
                     version = version.toInteger()
 					version++
 				
-			      	env.PROD_VERSION = version
-			    	env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
-			    	echo FIRST_VERSION
-			    	echo PROD_VERSION
-			    	echo DEV_VERSION
+			      	PROD_VERSION = version
+			    	VERSION = FIRST_VERSION + "." + PROD_VERSION + "." + DEV_VERSION
 			    }
 			}
     	}
@@ -74,11 +64,8 @@ pipeline {
                     version = version.toInteger()
 					version++
 				
-					env.DEV_VERSION = version
-					env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
-			    	echo FIRST_VERSION
-			    	echo PROD_VERSION
-			    	echo DEV_VERSION
+					DEV_VERSION = version
+					VERSION = FIRST_VERSION + "." + PROD_VERSION + "." + DEV_VERSION
     		    }
     		}
     	}
@@ -99,14 +86,14 @@ pipeline {
         
         stage ('Docker build'){
         	steps{
-        	   sh "docker build . -t eu.gcr.io/edith-259213/edith:${env.VERSION}"
+        	   sh "docker build . -t eu.gcr.io/edith-259213/edith:VERSION"
         	}
         }
         
         stage ('Push the image on GCR'){
         	steps{
         	   sh 'gcloud auth configure-docker --quiet'
-        	   sh "docker push eu.gcr.io/edith-259213/edith:${env.VERSION}"
+        	   sh "docker push eu.gcr.io/edith-259213/edith:VERSION"
 
         	}
         }
@@ -115,8 +102,8 @@ pipeline {
            steps{
 	   	script {
 	   	 	def filename = 'Deploy/edith-deployment.yaml'
-	   	 	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: ${env.VERSION}/\' $filename"
-		 	sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/edith:${env.VERSION}/ $filename"
+	   	 	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: VERSION/\' $filename"
+		 	sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/edith:VERSION/ $filename"
 		 	sh "cat $filename"
 		 }
            }
@@ -127,7 +114,7 @@ pipeline {
            sshagent (credentials: ['github-ssh']) { 
 				sh'git add Deploy/edith-deployment.yaml'
 				sh'git commit -m "Update image version (from jenkins_CI)"'
-				sh"git push origin HEAD:${env.BRANCH}"
+				sh"git push origin HEAD:BRANCH"
 				}
            }
         }
