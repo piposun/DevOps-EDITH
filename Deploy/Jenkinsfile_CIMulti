@@ -7,11 +7,13 @@ pipeline {
 
     stages {
     	stage('Pipeline variable definition'){
-	    	BRANCH = "master"
-	    	FIRST_VERSION = "1"
-			PROD_VERSION = "0"
-			DEV_VERSION = "0"
-			VERSION = "1.0.0"
+    		steps{
+		    	def BRANCH = "master"
+		    	def FIRST_VERSION = "1"
+				def PROD_VERSION = "0"
+				def DEV_VERSION = "0"
+				def VERSION = "1.0.0"
+			}
 		}
 		
     	stage ('Read YAML file') {
