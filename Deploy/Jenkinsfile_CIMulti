@@ -10,7 +10,8 @@ pipeline {
     	stage ('Read YAML file') {
             steps {
             	sh 'rm -rf DevOps-deployment'
-            	sh 'git clone https://github.com/piposun/DevOps-deployment'
+            	sshagent (credentials: ['github-ssh']) {
+            	sh 'git clone git@github.com:piposun/DevOps-deployment.git'
             	dir("DevOps-deployment") {
 
 	                
@@ -31,6 +32,7 @@ pipeline {
 			    		env.DEV_VERSION = devVersion	    		
 	                }
                 }
+            }
             }
         }
 	
