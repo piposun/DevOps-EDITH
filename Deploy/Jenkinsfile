@@ -4,6 +4,7 @@ pipeline {
    stages {
       stage('Test') {
          steps {
+         	step{
          	if(BRANCH_NAME) {
  				echo "${BRANCH_NAME}"
             }     
@@ -22,6 +23,7 @@ pipeline {
             if(CHANGE_TARGET) { 
             	echo "${CHANGE_TARGET}"
             }
+         	}
          }
       }
    }
