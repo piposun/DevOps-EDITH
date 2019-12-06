@@ -122,7 +122,7 @@ pipeline {
            
 					sh'git add edith-deployment.yaml'
 					sh'git commit -m "Update image version (from jenkins_CI)"'
-					sh"git push origin HEAD:master"
+					sh"git push origin HEAD:refs/remotes/origin/master"
 				}
 			  }
            }
