@@ -41,6 +41,7 @@ pipeline {
 					version++
 				
 			      	env.PROD_VERSION = version
+			      	env.DEV_VERSION = "0"
 			    	env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
 			    }
 			}
