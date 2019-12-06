@@ -1,4 +1,4 @@
-version_build: 1.0.0
+version_build: 1.0.1
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -48,7 +48,7 @@ spec:
       containers:
         - name: edith
           imagePullPolicy: Always
-          image: "eu.gcr.io/edith-259213/edith:1.0.0"
+          image: "eu.gcr.io/edith-259213/edith:1.0.1"
           ports:
             - name: http
               containerPort: 8080
