@@ -27,9 +27,9 @@ pipeline {
                     def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
                     def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
 		    
-		    		env.FIRST_VERSION = $firstVersion
-                    env.PROD_VERSION = $prodVersion
-		    		env.DEV_VERSION = $devVersion
+		    		env.FIRST_VERSION = firstVersion
+                    env.PROD_VERSION = prodVersion
+		    		env.DEV_VERSION = devVersion
                 }
             }
         }
@@ -45,11 +45,11 @@ pipeline {
                     version = version.toInteger()
 					version++
 				
-			      	env.PROD_VERSION = "$version"
-			    	env.VERSION = "$env.FIRST_VERSION" + "." + "$env.PROD_VERSION" + "." + "$env.DEV_VERSION"
-			    	echo env.FIRST_VERSION
-			    	echo env.PROD_VERSION
-			    	echo env.DEV_VERSION
+			      	env.PROD_VERSION = version
+			    	env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
+			    	echo FIRST_VERSION
+			    	echo PROD_VERSION
+			    	echo DEV_VERSION
 			    }
 			}
     	}
@@ -69,11 +69,10 @@ pipeline {
 					version++
 				
 					env.DEV_VERSION = version
-					env.VERSION = "$env.FIRST_VERSION" + "." + "$env.PROD_VERSION" + "." + "$env.DEV_VERSION"
-			    	echo env.FIRST_VERSION
-			    	echo env.PROD_VERSION
-			    	echo env.DEV_VERSION
-			    	echo "Version dev : " + version
+					env.VERSION = "${FIRST_VERSION}" + "." + "${PROD_VERSION}" + "." + "${DEV_VERSION}"
+			    	echo FIRST_VERSION
+			    	echo PROD_VERSION
+			    	echo DEV_VERSION
     		    }
     		}
     	}
