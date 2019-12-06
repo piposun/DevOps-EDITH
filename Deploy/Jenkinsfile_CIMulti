@@ -8,11 +8,13 @@ pipeline {
     stages {
     	stage('Pipeline variable definition'){
     		steps{
-		    	def BRANCH = "master"
-		    	def FIRST_VERSION = "1"
-				def PROD_VERSION = "0"
-				def DEV_VERSION = "0"
-				def VERSION = "1.0.0"
+    			script{
+			    	def BRANCH = "master"
+			    	def FIRST_VERSION = "1"
+					def PROD_VERSION = "0"
+					def DEV_VERSION = "0"
+					def VERSION = "1.0.0"
+				}
 			}
 		}
 		
