@@ -11,25 +11,24 @@ pipeline {
             steps {
             	sh 'rm -rf DevOps-deployment; mkdir -p DevOps-deployment'
             	dir("DevOps-deployment") {
-            	sshagent (credentials: ['github-ssh']) {
-                git 'https://github.com/piposun/DevOps-deployment'
-           
-                script {
-                    def filename = 'edith-deployment.yaml'
-                    def data = readYaml file: filename
-                    def seperator = '.'
-                    def version = data.version_build[0].toString()
-                   
-                    def firstVersion = version.substring(0, version.indexOf(seperator))
-                    def tmp = version.substring(version.indexOf(seperator)+1, version.length())
-                    def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
-                    def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
-		    
-		    		env.FIRST_VERSION = firstVersion
-                    env.PROD_VERSION = prodVersion
-		    		env.DEV_VERSION = devVersion	    		
-                }
-                }
+
+	                git 'https://github.com/piposun/DevOps-deployment'
+	           
+	                script {
+	                    def filename = 'edith-deployment.yaml'
+	                    def data = readYaml file: filename
+	                    def seperator = '.'
+	                    def version = data.version_build[0].toString()
+	                   
+	                    def firstVersion = version.substring(0, version.indexOf(seperator))
+	                    def tmp = version.substring(version.indexOf(seperator)+1, version.length())
+	                    def prodVersion = tmp.substring(0, tmp.indexOf(seperator))
+	                    def devVersion = tmp.substring(tmp.indexOf(seperator)+1, tmp.length())
+			    
+			    		env.FIRST_VERSION = firstVersion
+	                    env.PROD_VERSION = prodVersion
+			    		env.DEV_VERSION = devVersion	    		
+	                }
                 }
             }
         }
@@ -117,6 +116,9 @@ pipeline {
            dir("DevOps-deployment") {
            sh'ls'
            sshagent (credentials: ['github-ssh']) {
+           
+           	sh'git config --global user.name "jenkins"'
+                        sh'git config --global user.email "jenkins@isen.fr"'
            
 					sh'git add edith-deployment.yaml'
 					sh'git commit -m "Update image version (from jenkins_CI)"'
