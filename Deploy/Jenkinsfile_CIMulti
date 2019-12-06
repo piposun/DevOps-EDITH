@@ -9,11 +9,11 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-            	sh 'pwd; ls ; mkdir -p DevOps-deployment; cd DevOps-deployment; ls'
-                git 'https://github.com/piposun/DevOps-deployment'
+            	sh 'mkdir -p DevOps-deployment'
+                sh "cd DevOps-deployment; git 'https://github.com/piposun/DevOps-deployment'"
                 sh 'ls; ls DevOps-deployment'
                 script {
-                    def filename = 'edith-deployment.yaml'
+                    def filename = 'DevOps-deployment/edith-deployment.yaml'
                     def data = readYaml file: filename
                     def seperator = '.'
                     def version = data.version_build[0].toString()
@@ -27,7 +27,6 @@ pipeline {
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion	    		
                 }
-                sh 'cd .. ; ls'
             }
         }
 	
@@ -112,12 +111,12 @@ pipeline {
         stage ('Commit/Push edit-deployment.yaml'){
            steps{
            sshagent (credentials: ['github-ssh']) {
-           	    sh'cd DevOps-deployment'
-				sh'git add edith-deployment.yaml'
-				sh'git commit -m "Update image version (from jenkins_CI)"'
-				sh"git push origin HEAD:master"
-				sh 'cd ..'
+           		dir("DevOps-deployment") {
+					sh'git add edith-deployment.yaml'
+					sh'git commit -m "Update image version (from jenkins_CI)"'
+					sh"git push origin HEAD:master"
 				}
+			  }
            }
         }
   
