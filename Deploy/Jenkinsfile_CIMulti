@@ -30,6 +30,12 @@ pipeline {
 		    		env.FIRST_VERSION = firstVersion
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion
+		    		echo "first version: " + firstVersion
+			    	echo "prod version: " + prodVersion
+			    	echo "dev version: " + devVersion
+		    		echo "dev version: ${FIRST_VERSION}"
+			    	echo "dev version: ${PROD_VERSION}"
+			    	echo "dev version: ${DEV_VERSION}"
                 }
             }
         }
