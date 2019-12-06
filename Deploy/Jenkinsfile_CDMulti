@@ -57,6 +57,7 @@ pipeline {
     		}
     	    steps{
     	    	git 'https://github.com/piposun/DevOps-deployment'
+    	    	sh'cat edith-deployment.yaml'
     	    	
                 sh'kubectl apply --validate=false -f edith-deployment.yaml -n development'
             }
