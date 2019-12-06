@@ -9,7 +9,7 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-            	
+            	sh 'rm -rf DevOps-deployment'
             	sh 'git clone https://github.com/piposun/DevOps-deployment'
             	dir("DevOps-deployment") {
 
