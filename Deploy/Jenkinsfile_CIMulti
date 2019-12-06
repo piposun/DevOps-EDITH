@@ -9,7 +9,7 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-            	sh 'pwd; mkdir -p DevOps-deployment; cd DevOps-deployment'
+            	sh 'pwd; mkdir -p DevOps-deployment; cd DevOps-deployment; ls'
                 git 'https://github.com/piposun/DevOps-deployment'
                 sh 'ls'
                 script {
