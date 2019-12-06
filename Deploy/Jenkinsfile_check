@@ -4,9 +4,7 @@ pipeline {
         maven 'Maven 3.3.9'
         jdk 'jdk8'
     }
-    environment{
-        
-    }
+
     stages {
         stage ('Initialize') {
             steps {
@@ -23,7 +21,6 @@ pipeline {
         	}
             steps {
                 echo "Development branch has been updated - Skip"
-                return
             }
         } 
        
