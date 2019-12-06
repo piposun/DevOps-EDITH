@@ -4,26 +4,50 @@ pipeline {
    stages {
       stage('Test') {
          steps {
-         	step{
-         	if(BRANCH_NAME) {
- 				echo "${BRANCH_NAME}"
-            }     
-            if(CHANGE_ID) { 
-            	echo "${CHANGE_ID}"
-            }
-            if(CHANGE_URL) { 
-            	echo "${CHANGE_URL}"
-            }
-            if(CHANGE_TITLE) { 
-            	echo "${CHANGE_TITLE}"
-            }
-            if(CHANGE_AUTHOR) { 
-            	echo "${CHANGE_AUTHOR}"
-            }
-            if(CHANGE_TARGET) { 
-            	echo "${CHANGE_TARGET}"
-            }
-         	}
+         
+	         try {
+	  		 echo " BRANCH_NAME=$BRANCH_NAME"
+	         }
+	  	     catch (MissingPropertyException e) {
+	          
+	         }  
+         
+         
+	         try {
+	  		 echo " CHANGE_ID=$CHANGE_ID"
+	         }
+	  	     catch (MissingPropertyException e) {
+	          
+	         }   
+           
+	 try {
+	  		 echo " CHANGE_URL=$CHANGE_URL"
+	         }
+	  	     catch (MissingPropertyException e) {
+	          
+	         }  
+         
+	            try {
+	  		 echo " CHANGE_TITLE=$CHANGE_TITLE"
+	         }
+	  	     catch (MissingPropertyException e) {
+	          
+	         }  
+         
+	           try {
+	  		 echo " CHANGE_AUTHOR=$CHANGE_AUTHOR"
+	         }
+	  	     catch (MissingPropertyException e) {
+	          
+	         }   
+         
+	         try {
+	  		 echo " CHANGE_TARGET=$CHANGE_TARGET"
+	         }
+	  	     catch (MissingPropertyException e) {
+	          
+	         }  
+         
          }
       }
    }
