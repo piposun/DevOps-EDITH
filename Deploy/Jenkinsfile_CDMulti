@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+    environment{
+        GCLOUD_PROJECT_ID = 'edith-259213'
+        GCLOUD_K8S_CLUSTER_NAME = 'edith-cluster'
+        GCLOUD_K8S_CONTEXT_NAME = 'edith-cluster'
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh'''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+        stage ('Deploy - Cluster connection') {
+            steps {
+                sh'gcloud container clusters get-credentials ${GCLOUD_K8S_CLUSTER_NAME} --region europe-west1-b'
+            }
+       	}
+       	
+    	stage('Application deployment on K8S') {
+    	    steps{
+                sh'kubectl apply --validate=false -f Deploy/edith-deployment.yaml'
+            }
+    	}
+        
+    }
+}
