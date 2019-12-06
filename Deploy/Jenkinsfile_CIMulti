@@ -9,10 +9,11 @@ pipeline {
     
     	stage ('Read YAML file') {
             steps {
-                //git 'https://github.com/piposun/DevOps-deployment'
+            	sh 'mkdir -p DevOps-deployment; cd DevOps-deployment'
+                git 'https://github.com/piposun/DevOps-deployment'
                 sh 'ls'
                 script {
-                    def filename = 'DevOps-deployment/edith-deployment.yaml'
+                    def filename = 'edith-deployment.yaml'
                     def data = readYaml file: filename
                     def seperator = '.'
                     def version = data.version_build[0].toString()
@@ -26,6 +27,7 @@ pipeline {
                     env.PROD_VERSION = prodVersion
 		    		env.DEV_VERSION = devVersion	    		
                 }
+                sh 'cd .. ; ls'
             }
         }
 	
@@ -114,6 +116,7 @@ pipeline {
 				sh'git add edith-deployment.yaml'
 				sh'git commit -m "Update image version (from jenkins_CI)"'
 				sh"git push origin HEAD:master"
+				sh 'cd ..'
 				}
            }
         }
