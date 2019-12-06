@@ -6,10 +6,10 @@ pipeline {
     }
     environment{
         BRANCH = "master"
-        FIRST_VERSION = ""
-		PROD_VERSION = ""
-		DEV_VERSION = ""
-		VERSION = ""
+        //FIRST_VERSION = ""
+		//PROD_VERSION = ""
+		//DEV_VERSION = ""
+		//VERSION = ""
     }
 
     stages {
