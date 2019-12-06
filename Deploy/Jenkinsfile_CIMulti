@@ -117,8 +117,7 @@ pipeline {
            sh'ls'
            sshagent (credentials: ['github-ssh']) {
            
-           	sh'git config --global user.name "jenkins"'
-                        sh'git config --global user.email "jenkins@isen.fr"'
+           
            
 					sh'git add edith-deployment.yaml'
 					sh'git commit -m "Update image version (from jenkins_CI)"'
