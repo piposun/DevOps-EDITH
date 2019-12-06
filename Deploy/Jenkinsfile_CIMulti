@@ -105,6 +105,7 @@ pipeline {
 	   	 	def filename = 'Deploy/edith-deployment.yaml'
 	   	 	sh "sed -i \'s/version_build: [0-9]*.[0-9]*.[0-9]*/version_build: $version/\' $filename"
 		 	sh "sed -i s/edith:[0-9]*.[0-9]*.[0-9]*/edith:${env.VERSION}/ $filename"
+		 	sh "cat $filename"
 		 }
            }
         }
