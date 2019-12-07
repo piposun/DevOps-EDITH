@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class HomePageTest {
+public class HomePageTest2 {
 	private WebDriver driver;
 	private String baseUrl;
 	private String pageTitle;
@@ -33,9 +33,9 @@ public class HomePageTest {
 		driver.get(baseUrl);
 		pageTitle = driver.getTitle();
 		if (pageTitle.equals(expectedTitle)) {
-			System.out.println("Home Page Title PASSED ");
+			System.out.println("Home Page2 Title PASSED ");
 		} else {
-			System.out.println("Home Page Title FAILED");
+			System.out.println("Home Page2 Title FAILED");
 			Assert.fail();
 		}
 	}
