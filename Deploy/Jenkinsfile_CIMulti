@@ -83,7 +83,7 @@ pipeline {
         
         stage ('Build') {
             steps {
-                sh 'mvn clean package verify sonar:sonar'
+                sh 'mvn clean package'
             }
         }
         
