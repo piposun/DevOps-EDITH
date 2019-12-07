@@ -88,16 +88,18 @@ pipeline {
     	}  
     	
     	stage('Post Selenium report'){
-    	when{
-    		branch 'development'
-    	}
-    		post {
-        		always {
-          	  		junit 'DevOps-EDITH/target/surefire-reports/**/*.xml' 
-        		}
-        		success {
-        	   		 echo 'Junit report published'
-        		}
+    		when{
+    			branch 'development'
+    		}
+    		steps{
+	    		post {
+	        		always {
+	          	  		junit 'DevOps-EDITH/target/surefire-reports/**/*.xml' 
+	        		}
+	        		success {
+	        	   		 echo 'Junit report published'
+	        		}
+	        	}
         	}
     	}
     }
