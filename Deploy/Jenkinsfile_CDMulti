@@ -69,7 +69,7 @@ pipeline {
     		}
     		steps{
     			script{
-	    			env.URL_DEV = sh(script: "kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'", returnStdout: false)
+	    			env.URL_DEV = sh(script: "kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'", returnStdout: true).trim()
 	    		}
 	    		sh 'echo "$URL_DEV"'
         	}
