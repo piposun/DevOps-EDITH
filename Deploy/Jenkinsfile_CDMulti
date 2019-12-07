@@ -78,14 +78,14 @@ pipeline {
         	}
         }
     	
-    	stage('Scan Development deployment with Probely') {
-    		when{
-    			branch 'development'
-    		}
-      		steps {
-        		probelyScan targetId: 'uPzaydsig2jo', credentialsId: 'probely-edith'
-      		}
-    	}  
+    	//stage('Scan Development deployment with Probely') {
+    		//when{
+    			//branch 'development'
+    		//}
+      		//steps {
+        		//probelyScan targetId: 'uPzaydsig2jo', credentialsId: 'probely-edith'
+      		//}
+    	//}  
     	
     	stage('Post Selenium report'){
     		when{
