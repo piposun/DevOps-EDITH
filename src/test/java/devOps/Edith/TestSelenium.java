@@ -50,8 +50,8 @@ public class TestSelenium {
 		WebElement password = driver.findElement(By.name("pass"));
 
 		WebElement login = driver.findElement(By.xpath("//input[@value='Sign In']"));
-		username.sendKeys("test");
-		password.sendKeys("test");
+		username.sendKeys("toto");
+		password.sendKeys("toto");
 		login.click();
 
 		String actualUrl = "http://" + System.getProperty("myUrlTest") + ":8080/edith/!test";
