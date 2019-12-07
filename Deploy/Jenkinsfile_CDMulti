@@ -72,6 +72,7 @@ pipeline {
     			sh 'rm -rf DevOps-EDITH'
             	sshagent (credentials: ['github-ssh']) {
 	            	sh 'git clone git@github.com:piposun/DevOps-EDITH.git'
+	            	sh 'git checkout development'
 	            	dir("DevOps-EDITH") {
 		    			script{
 			    			env.URL_DEV = sh(script: "kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'", returnStdout: true).trim()
