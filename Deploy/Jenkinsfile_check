@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh'''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+        
+        stage ('Exit when update on development') {
+        	when{
+        	    branch 'development'
+        	}
+            steps {
+                echo "Development branch has been updated - Skip"
+            }
+        } 
+       
+        stage ('Master branch update - Launch master CI and CD pipeline') {
+        	when{
+        	    branch 'master'
+        	}
+            steps {
+                build job: 'edith_multi_branch_CI/master', propagate: true, wait: true
+                build job: 'edith_multi_branch_CD/master', propagate: true, wait: true
+            }
+        } 
+         
+    }
+}
