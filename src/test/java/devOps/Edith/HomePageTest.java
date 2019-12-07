@@ -2,6 +2,8 @@ package devOps.Edith;
 
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,9 +33,15 @@ public class HomePageTest {
 		driver.get(baseUrl);
 		pageTitle = driver.getTitle();
 		if (pageTitle.equals(expectedTitle)) {
+
+			System.out.println("Home Page Title PASSED ");
+			Assert.assertTrue(true);
 			System.out.println("Home Page Title PASSED");
+
 		} else {
 			System.out.println("Home Page Title FAILED");
+			Assert.assertFalse(false);
+			Assert.fail();
 		}
 	}
 

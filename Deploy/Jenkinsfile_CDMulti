@@ -86,5 +86,15 @@ pipeline {
         		probelyScan targetId: 'uPzaydsig2jo', credentialsId: 'probely-edith'
       		}
     	}  
+    	
+    	stage('Post Selenium report'){
+    		when{
+    			branch 'development'
+    		}
+    		steps{
+	          	junit '**/target/surefire-reports/TEST-*.xml'
+               	archiveArtifacts 'target/surefire-reports/*.txt'
+        	}
+    	}
     }
 }
