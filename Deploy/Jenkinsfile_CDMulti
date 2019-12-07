@@ -74,7 +74,7 @@ pipeline {
 			    		}
 			    		sh 'echo "$URL_DEV"'
 			    		//sh 'ls ; cat src/test/java/devOps/Edith/HomePageTest.java'
-			    		sh 'mvn clean test -DmyUrlTest=$URL_DEV'
+			    		sh 'mvn clean integration-test -DmyUrlTest=$URL_DEV'
         	}
         }
     	
