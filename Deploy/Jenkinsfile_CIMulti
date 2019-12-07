@@ -80,6 +80,13 @@ pipeline {
                 '''
             }
         }
+        
+        stage ('SonarQube') {
+            steps {
+                sh 'mvn clean verify sonar:sonar'
+            }
+        }
+        
         stage ('Build') {
             steps {
                 sh 'mvn clean package'
