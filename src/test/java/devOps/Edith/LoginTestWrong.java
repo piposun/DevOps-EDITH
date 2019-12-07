@@ -25,7 +25,7 @@ public class LoginTestWrong {
 	
 	@Test
 	public void testLogin(){
-  driver.get("http://35.240.3.128:8080/edith/signIn"); 
+  driver.get("http://"+System.getProperty("myUrlTest")+":8080/edith/signIn"); 
   
   
   WebElement username=driver.findElement(By.name("name")); 
@@ -35,7 +35,7 @@ public class LoginTestWrong {
   username.sendKeys("test"); password.sendKeys("toto"); 
   login.click(); 
   
-  String actualUrl="http://35.240.3.128:8080/edith/signIn"; 
+  String actualUrl="http://"+System.getProperty("myUrlTest")+":8080/edith/signIn"; 
   String expectedUrl= driver.getCurrentUrl(); 
   
   if(actualUrl.equalsIgnoreCase(expectedUrl)) { 
