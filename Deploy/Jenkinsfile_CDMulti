@@ -68,11 +68,8 @@ pipeline {
     			branch 'development'
     		}
     		steps{
-    			script{
-    				def url_dev = "toto"
-    				sh "$url_dev=kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'"
-    			    echo url_dev
-    			    }
+    			def url_dev = sh(script: "kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'", returnStdout: true)
+    			sh 'echo $url_dev'
         	}
         }
     	
