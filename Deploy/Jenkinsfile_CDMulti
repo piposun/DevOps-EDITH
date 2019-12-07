@@ -63,6 +63,17 @@ pipeline {
             }
     	}
     	
+    	stage('Selenium Test for Development Deployment'){
+    		when{
+    			branch 'development'
+    		}
+    		steps{
+    			script{
+    				def url_dev = kubectl get services --namespace development edith | awk '{print $4}' | sed '1,1d'
+    			    echo url_dev
+    			    
+    			}
+    	
     	stage('Scan Development deployment with Probely') {
     		when{
     			branch 'development'
