@@ -92,14 +92,7 @@ pipeline {
     			branch 'development'
     		}
     		steps{
-	    		post {
-	        		always {
-	          	  		junit 'DevOps-EDITH/target/surefire-reports/**/*.xml' 
-	        		}
-	        		success {
-	        	   		 echo 'Junit report published'
-	        		}
-	        	}
+	          	 junit 'DevOps-EDITH/target/surefire-reports/**/*.xml' 
         	}
     	}
     }
