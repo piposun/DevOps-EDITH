@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class HomePageTest2 {
+public class HomePageTest {
 	private WebDriver driver;
 	private String baseUrl;
 	private String pageTitle;
