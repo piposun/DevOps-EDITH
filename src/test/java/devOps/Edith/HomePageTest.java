@@ -22,7 +22,7 @@ public class HomePageTest {
 	      ChromeOptions.addArguments("--headless", "window-size=1024,768", "--no-sandbox");
 		
 		driver = new ChromeDriver(ChromeOptions);
-		baseUrl = "http://35.241.255.100:8080/edith/";
+		baseUrl = "http://"+System.getProperty("WSNSHELL_HOME")+":8080/edith/";
 		pageTitle = "";
 		expectedTitle = "EDITH : Redis demonstration";
 	}
