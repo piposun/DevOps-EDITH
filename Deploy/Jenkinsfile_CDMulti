@@ -71,7 +71,7 @@ pipeline {
     			//git 'https://github.com/piposun/DevOps-EDITH'
     			sh 'rm -rf DevOps-EDITH'
             	sshagent (credentials: ['github-ssh']) {
-	            	sh 'git clone git@github.com:piposun/DevOps-EDITH.git'
+	            	sh 'git clone -b development git@github.com:piposun/DevOps-EDITH.git'
 	            	sh 'git checkout development'
 	            	dir("DevOps-EDITH") {
 		    			script{
