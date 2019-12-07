@@ -87,6 +87,12 @@ pipeline {
             }
         }
         
+        stage ('SonarQube') {
+            steps {
+                sh 'mvn verify sonar:sonar'
+            }
+        }
+        
         stage ('Docker build'){
         	steps{
         	   sh "docker build . -t eu.gcr.io/edith-259213/edith:${env.VERSION}"
