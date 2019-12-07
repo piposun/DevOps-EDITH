@@ -92,7 +92,8 @@ pipeline {
     			branch 'development'
     		}
     		steps{
-	          	 junit 'DevOps-EDITH/target/surefire-reports/**/*.xml' 
+	          	junit '**/target/surefire-reports/TEST-*.xml'
+               	archiveArtifacts 'target/*.jar'
         	}
     	}
     }
