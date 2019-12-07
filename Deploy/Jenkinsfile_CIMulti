@@ -83,13 +83,7 @@ pipeline {
         
         stage ('Build') {
             steps {
-                sh 'mvn clean package -Dmaven.test.skip=true verify sonar:sonar'
-            }
-        }
-        
-        stage ('SonarQube') {
-            steps {
-                sh 'mvn verify sonar:sonar'
+                sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
         
