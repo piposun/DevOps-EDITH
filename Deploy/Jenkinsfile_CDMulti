@@ -78,7 +78,7 @@ pipeline {
 			    			env.URL_DEV = sh(script: "kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'", returnStdout: true).trim()
 			    		}
 			    		sh 'echo "$URL_DEV"'
-			    		sh 'mvn clean test -DmyUrlTest=$URL_DEV'
+			    		sh 'mvn clean package -DmyUrlTest=$URL_DEV'
 		    		}
 		    	}
         	}
