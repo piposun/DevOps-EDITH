@@ -25,7 +25,7 @@ public class HomePageTest {
 		driver = new ChromeDriver(ChromeOptions);
 		baseUrl = "http://" + System.getProperty("myUrlTest") + ":8080/edith/";
 		pageTitle = "";
-		expectedTitle = "EDITH : Redis emonstration";
+		expectedTitle = "EDITH : Redis demonstration";
 	}
 
 	@Test
