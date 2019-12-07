@@ -34,6 +34,7 @@ public class HomePageTest {
 		pageTitle = driver.getTitle();
 		if (pageTitle.equals(expectedTitle)) {
 			System.out.println("Home Page Title PASSED ");
+			Assert.assertTrue(true);
 		} else {
 			System.out.println("Home Page Title FAILED");
 			Assert.fail();
