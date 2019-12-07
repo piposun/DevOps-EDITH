@@ -1,4 +1,4 @@
-package devOps.Edith;
+package toto;
 
 import org.junit.Test;
 
