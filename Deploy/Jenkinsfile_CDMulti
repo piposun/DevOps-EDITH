@@ -62,6 +62,15 @@ pipeline {
                 sh'kubectl apply --validate=false -f edith-deployment.yaml -n development'
             }
     	}
+    	
+    	stage('Scan Development deployment with Probely') {
+    		when{
+    			branch 'development'
+    		}
+      		steps {
+        		probelyScan targetId: 'uPzaydsig2jo', credentialsId: 'probely-edith'
+      		}
+    	}
         
     }
 }
