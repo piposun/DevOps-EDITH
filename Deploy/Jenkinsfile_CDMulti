@@ -82,9 +82,8 @@ pipeline {
     			branch 'development'
     		}
       		steps {
-        		//probelyScan targetId: 'uPzaydsig2jo', credentialsId: 'probely-edith'
+        		probelyScan targetId: 'uPzaydsig2jo', credentialsId: 'probely-edith'
       		}
-    	}
-        
+    	}  
     }
 }
