@@ -2,6 +2,8 @@ package devOps.Edith;
 
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,7 +25,7 @@ public class HomePageTest {
 		driver = new ChromeDriver(ChromeOptions);
 		baseUrl = "http://" + System.getProperty("myUrlTest") + ":8080/edith/";
 		pageTitle = "";
-		expectedTitle = "EDITH : Redis demonstration";
+		expectedTitle = "EDITH : Redis deonstration";
 	}
 
 	@Test
@@ -34,6 +36,7 @@ public class HomePageTest {
 			System.out.println("Home Page Title PASSED ");
 		} else {
 			System.out.println("Home Page Title FAILED");
+			Assert.fail();
 		}
 	}
 
