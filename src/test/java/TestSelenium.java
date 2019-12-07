@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class HomePageTest {
+public class TestSelenium {
 	private WebDriver driver;
 	private String baseUrl;
 	private String pageTitle;
@@ -60,6 +60,7 @@ public class HomePageTest {
 			System.out.println("Login Test Good PASSED");
 		} else {
 			System.out.println("Login Test Good FAILED");
+			Assert.fail();
 		}
 	}
 
@@ -82,6 +83,7 @@ public class HomePageTest {
 			System.out.println("Login Test Wrong PASSED");
 		} else {
 			System.out.println("Login Test Wrong FAILED");
+			Assert.fail();
 		}
 	}
 
