@@ -25,7 +25,7 @@ public class HomePageTest {
 		driver = new ChromeDriver(ChromeOptions);
 		baseUrl = "http://" + System.getProperty("myUrlTest") + ":8080/edith/";
 		pageTitle = "";
-		expectedTitle = "EDITH : Redis demonstration";
+		expectedTitle = "EDITH : Redis emonstration";
 	}
 
 	@Test
@@ -37,6 +37,7 @@ public class HomePageTest {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Home Page Title FAILED");
+			Assert.assertFalse(false);
 			Assert.fail();
 		}
 	}
