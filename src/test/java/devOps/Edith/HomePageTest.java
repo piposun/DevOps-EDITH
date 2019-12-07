@@ -32,7 +32,7 @@ public class HomePageTest {
 		driver.get(baseUrl);
 		pageTitle = driver.getTitle();
 		if (pageTitle.equals(expectedTitle)) {
-			System.out.println("Home Page Title PASSED ");
+			System.out.println("Home Page Title PPPPASSED ");
 		} else {
 			System.out.println("Home Page Title FAILED");
 		}
