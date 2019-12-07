@@ -68,6 +68,7 @@ pipeline {
     			branch 'development'
     		}
     		steps{
+    			git 'https://github.com/piposun/DevOps-EDITH'
     			script{
 	    			env.URL_DEV = sh(script: "kubectl get services --namespace development edith | awk '{print \$4}' | sed '1,1d'", returnStdout: true).trim()
 	    		}
